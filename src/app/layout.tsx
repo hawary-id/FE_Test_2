@@ -1,6 +1,9 @@
+import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { SidebarProvider } from "@/context/SidebarContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +18,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <SidebarProvider>
+      <html lang="en">
+        <body className={`relative ${inter.className}`}>
+          <main className="bg-slate-100 hidden md:block">
+            <div className="flex h-screen">
+              <Sidebar/>
+              <div className="grow overflow-y-auto relative">
+                <Navbar/>
+                <div className="p-5">
+                  {children}
+                </div>
+              </div>
+            </div>
+          </main>
+          <div className="absolute top-0 w-full text-center h-screen bg-gray-800 flex items-center md:hidden justify-center text-white">
+            Sorry, this view does not yet support mobile devices.
+          </div>
+        </body>
+      </html>
+    </SidebarProvider>
   );
 }
