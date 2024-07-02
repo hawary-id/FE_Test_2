@@ -1,6 +1,5 @@
-import { FaFolder, FaRegFolder } from "react-icons/fa";
+import { FaRegFolder } from "react-icons/fa";
 import { FaCircle, FaRegCircle, FaRegFolderOpen } from "react-icons/fa6";
-import { GoCircle } from "react-icons/go";
 import { IoGrid, IoGridOutline } from "react-icons/io5";
 import { PiRoadHorizonFill, PiRoadHorizonLight } from "react-icons/pi";
 
@@ -34,29 +33,29 @@ export const MENU_DATA = [
 ]
 
 export const RUAS_DATA = [
-    { id: 1, nama: "Jakarta-Cikampek" },
-    { id: 2, nama: "Surabaya-Gempol" },
-    { id: 3, nama: "Bandung-Jakarta" },
-    { id: 4, nama: "Cikampek-Purwakarta" },
-    { id: 5, nama: "Surabaya-Mojokerto" },
-    { id: 6, nama: "Bandung-Tangerang" },
-    { id: 7, nama: "Jakarta-Semarang" },
-    { id: 8, nama: "Cikampek-Cirebon" },
-    { id: 9, nama: "Surabaya-Malang" },
-    { id: 10, nama: "Bandung-Garut" },
-    { id: 11, nama: "Jakarta-Serang" },
-    { id: 12, nama: "Semarang-Jogja" },
-    { id: 13, nama: "Cikampek-Bandung" },
-    { id: 14, nama: "Surabaya-Sidoarjo" },
-    { id: 15, nama: "Bandung-Sukabumi" },
-    { id: 16, nama: "Jakarta-Bogor" },
-    { id: 17, nama: "Semarang-Solo" },
-    { id: 18, nama: "Cikampek-Jakarta" },
-    { id: 19, nama: "Surabaya-Banyuwangi" },
-    { id: 20, nama: "Bandung-Cirebon" },
-    { id: 21, nama: "Jakarta-Surabaya" },
-    { id: 22, nama: "Semarang-Magelang" },
-    { id: 23, nama: "Bandung-Garut" }
+    { id: 1, nama: "Ruas 1" },
+    { id: 2, nama: "Ruas 2" },
+    { id: 3, nama: "Ruas 1" },
+    { id: 4, nama: "Ruas 1" },
+    { id: 5, nama: "Ruas 2" },
+    { id: 6, nama: "Ruas 2" },
+    { id: 7, nama: "Ruas 1" },
+    { id: 8, nama: "Ruas 1" },
+    { id: 9, nama: "Ruas 2" },
+    { id: 10, nama: "Ruas 2" },
+    { id: 11, nama: "Ruas 1" },
+    { id: 12, nama: "Ruas 1" },
+    { id: 13, nama: "Ruas 1" },
+    { id: 14, nama: "Ruas 2" },
+    { id: 15, nama: "Ruas 2" },
+    { id: 16, nama: "Ruas 1" },
+    { id: 17, nama: "Ruas 1" },
+    { id: 18, nama: "Ruas 2" },
+    { id: 19, nama: "Ruas 2" },
+    { id: 20, nama: "Ruas 1" },
+    { id: 21, nama: "Ruas 1" },
+    { id: 22, nama: "Ruas 1" },
+    { id: 23, nama: "Ruas 2" }
 ]
 
 export const GERBANG_DATA = [
@@ -86,12 +85,12 @@ export const GARDU_DATA = [
 ]
 export const LALIN_DATA = [
     {
-        ruas_nama: "Jakarta-Cikampek",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Cikarang Utama",
         gardu: "01",
         hari: "Sabtu",
         tanggal: "2024-01-06",
-        metode_pembayaran: "E-money",
+        metode_pembayaran: "fio",
         gol_1: 250,
         gol_2: 380,
         gol_3: 320,
@@ -100,7 +99,7 @@ export const LALIN_DATA = [
         total_lalin: 1520,
     },
     {
-        ruas_nama: "Jakarta-Cikampek",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Cikarang Utama",
         gardu: "02",
         hari: "Senin",
@@ -114,7 +113,7 @@ export const LALIN_DATA = [
         total_lalin: 1400,
     },
     {
-        ruas_nama: "Surabaya-Gempol",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Pasuruan Timur",
         gardu: "03",
         hari: "Rabu",
@@ -128,12 +127,12 @@ export const LALIN_DATA = [
         total_lalin: 1200,
     },
     {
-        ruas_nama: "Bandung-Jakarta",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Cikampek Barat",
         gardu: "04",
         hari: "Kamis",
         tanggal: "2024-04-10",
-        metode_pembayaran: "E-money",
+        metode_pembayaran: "fio",
         gol_1: 220,
         gol_2: 360,
         gol_3: 300,
@@ -142,7 +141,7 @@ export const LALIN_DATA = [
         total_lalin: 1420,
     },
     {
-        ruas_nama: "Cikampek-Purwakarta",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Purwakarta Utama",
         gardu: "05",
         hari: "Jumat",
@@ -156,7 +155,7 @@ export const LALIN_DATA = [
         total_lalin: 1490,
     },
     {
-        ruas_nama: "Surabaya-Mojokerto",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Mojokerto Timur",
         gardu: "06",
         hari: "Sabtu",
@@ -170,12 +169,12 @@ export const LALIN_DATA = [
         total_lalin: 1580,
     },
     {
-        ruas_nama: "Bandung-Tangerang",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Tangerang Selatan",
         gardu: "07",
         hari: "Minggu",
         tanggal: "2024-07-18",
-        metode_pembayaran: "E-money",
+        metode_pembayaran: "ktp",
         gol_1: 270,
         gol_2: 400,
         gol_3: 340,
@@ -184,7 +183,7 @@ export const LALIN_DATA = [
         total_lalin: 1630,
     },
     {
-        ruas_nama: "Jakarta-Semarang",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Brebes Timur",
         gardu: "08",
         hari: "Senin",
@@ -198,7 +197,7 @@ export const LALIN_DATA = [
         total_lalin: 1680,
     },
     {
-        ruas_nama: "Cikampek-Cirebon",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Cirebon Utara",
         gardu: "04",
         hari: "Selasa",
@@ -212,12 +211,12 @@ export const LALIN_DATA = [
         total_lalin: 1730,
     },
     {
-        ruas_nama: "Surabaya-Malang",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Malang Utara",
         gardu: "09",
         hari: "Rabu",
         tanggal: "2024-10-20",
-        metode_pembayaran: "E-money",
+        metode_pembayaran: "fio",
         gol_1: 300,
         gol_2: 430,
         gol_3: 370,
@@ -226,7 +225,7 @@ export const LALIN_DATA = [
         total_lalin: 1780,
     },
     {
-        ruas_nama: "Bandung-Garut",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Garut Selatan",
         gardu: "01",
         hari: "Kamis",
@@ -240,7 +239,7 @@ export const LALIN_DATA = [
         total_lalin: 1830,
     },
     {
-        ruas_nama: "Jakarta-Serang",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Serang Timur",
         gardu: "05",
         hari: "Jumat",
@@ -254,12 +253,12 @@ export const LALIN_DATA = [
         total_lalin: 1880,
     },
     {
-        ruas_nama: "Semarang-Jogja",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Jogja Utara",
         gardu: "07",
         hari: "Sabtu",
         tanggal: "2025-01-03",
-        metode_pembayaran: "E-money",
+        metode_pembayaran: "fio",
         gol_1: 330,
         gol_2: 460,
         gol_3: 400,
@@ -268,7 +267,7 @@ export const LALIN_DATA = [
         total_lalin: 1930,
     },
     {
-        ruas_nama: "Cikampek-Bandung",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Padalarang Timur",
         gardu: "04",
         hari: "Minggu",
@@ -282,7 +281,7 @@ export const LALIN_DATA = [
         total_lalin: 1980,
     },
     {
-        ruas_nama: "Surabaya-Sidoarjo",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Sidoarjo Timur",
         gardu: "10",
         hari: "Senin",
@@ -296,12 +295,12 @@ export const LALIN_DATA = [
         total_lalin: 2030,
     },
     {
-        ruas_nama: "Bandung-Sukabumi",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Sukabumi Utara",
         gardu: "03",
         hari: "Selasa",
         tanggal: "2025-04-25",
-        metode_pembayaran: "E-money",
+        metode_pembayaran: "fio",
         gol_1: 360,
         gol_2: 490,
         gol_3: 430,
@@ -310,7 +309,7 @@ export const LALIN_DATA = [
         total_lalin: 2080,
     },
     {
-        ruas_nama: "Jakarta-Bogor",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Bogor Selatan",
         gardu: "05",
         hari: "Rabu",
@@ -324,7 +323,7 @@ export const LALIN_DATA = [
         total_lalin: 2130,
     },
     {
-        ruas_nama: "Semarang-Solo",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Solo Barat",
         gardu: "02",
         hari: "Kamis",
@@ -338,12 +337,12 @@ export const LALIN_DATA = [
         total_lalin: 2180,
     },
     {
-        ruas_nama: "Cikampek-Jakarta",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Cikampek Timur",
         gardu: "09",
         hari: "Jumat",
         tanggal: "2025-07-03",
-        metode_pembayaran: "E-money",
+        metode_pembayaran: "fio",
         gol_1: 390,
         gol_2: 520,
         gol_3: 460,
@@ -352,7 +351,7 @@ export const LALIN_DATA = [
         total_lalin: 2230,
     },
     {
-        ruas_nama: "Surabaya-Banyuwangi",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Banyuwangi Barat",
         gardu: "06",
         hari: "Sabtu",
@@ -366,7 +365,7 @@ export const LALIN_DATA = [
         total_lalin: 2280,
     },
     {
-        ruas_nama: "Bandung-Cirebon",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Cirebon Selatan",
         gardu: "02",
         hari: "Minggu",
@@ -380,12 +379,12 @@ export const LALIN_DATA = [
         total_lalin: 2330,
     },
     {
-        ruas_nama: "Jakarta-Surabaya",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Waru Barat",
         gardu: "10",
         hari: "Senin",
         tanggal: "2025-10-28",
-        metode_pembayaran: "E-money",
+        metode_pembayaran: "fio",
         gol_1: 420,
         gol_2: 550,
         gol_3: 490,
@@ -394,7 +393,7 @@ export const LALIN_DATA = [
         total_lalin: 2380,
     },
     {
-        ruas_nama: "Semarang-Magelang",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Magelang Timur",
         gardu: "10",
         hari: "Selasa",
@@ -408,7 +407,7 @@ export const LALIN_DATA = [
         total_lalin: 2430,
     },
     {
-        ruas_nama: "Cikampek-Bandung",
+        ruas_nama: "Ruas 1",
         gerbang_nama: "Padalarang Barat",
         gardu: "03",
         hari: "Rabu",
@@ -422,12 +421,12 @@ export const LALIN_DATA = [
         total_lalin: 2480,
     },
     {
-        ruas_nama: "Surabaya-Malang",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Malang Selatan",
         gardu: "05",
         hari: "Kamis",
         tanggal: "2026-01-11",
-        metode_pembayaran: "E-money",
+        metode_pembayaran: "fio",
         gol_1: 450,
         gol_2: 580,
         gol_3: 520,
@@ -436,7 +435,7 @@ export const LALIN_DATA = [
         total_lalin: 2530,
     },
     {
-        ruas_nama: "Bandung-Garut",
+        ruas_nama: "Ruas 2",
         gerbang_nama: "Garut Utara",
         gardu: "01",
         hari: "Jumat",

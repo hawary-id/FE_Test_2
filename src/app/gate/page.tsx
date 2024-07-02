@@ -1,5 +1,4 @@
 'use client'
-import { DataTable } from "@/components/Datatable";
 import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +8,8 @@ import { useEffect, useState } from "react";
 import { IoAdd } from "react-icons/io5";
 import { Lalin, columns } from "./columns";
 import { LALIN_DATA } from "@/lib/constant";
+import { DataTable } from "./datatble";
+import { Separator } from "@/components/ui/separator";
 
 export default function Gate() {
     const [data, setData] = useState<Lalin[]>(LALIN_DATA);
@@ -54,8 +55,9 @@ export default function Gate() {
                 <CardTitle>Master Data Gerbang</CardTitle>
                 <CardDescription>Kelola data gerbang</CardDescription>
             </CardHeader>
+            <Separator/>
             <CardContent>
-                <div className="w-full flex justify-between items-center mb-8">
+                <div className="w-full flex justify-between items-center mt-5 mb-8">
                     <Input type="search" placeholder="Cari..." className="w-56" />
                     <Button asChild>
                         <Link href="/gate/create"><IoAdd className="text-xl"/> Tambah</Link>

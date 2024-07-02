@@ -6,3 +6,8 @@ export const gateFormSchema = z.object({
     gerbang_id: z.number({required_error: 'Gerbang tidak boleh kosong'}),
     gerbang_nama: z.string({required_error: 'Nama gerbang tidak boleh kosong'}),
 })
+
+export const signInFormSchema = z.object({
+    username: z.string({required_error: 'username harus diisi'}),
+    password: z.string({required_error: 'Password harus diisi'}),
+})
