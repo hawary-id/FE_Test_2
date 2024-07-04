@@ -6,47 +6,60 @@ import { ColumnDef } from "@tanstack/react-table"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Lalin = {
-  ruas_nama: string
-  gerbang_nama: string
-  gardu: string
-  hari: string
-  tanggal: string
-  metode_pembayaran: string
-  gol_1: number
-  gol_2: number
-  gol_3: number
-  gol_4: number
-  gol_5: number
-  total_lalin: number
+  id: number;
+    IdCabang: number;
+    IdGerbang: number;
+    Tanggal: string;
+    Shift: number;
+    IdGardu: number;
+    Golongan: number;
+    IdAsalGerbang: number;
+    Tunai: number;
+    DinasOpr: number;
+    DinasMitra: number;
+    DinasKary: number;
+    eMandiri: number;
+    eBri: number;
+    eBni: number;
+    eBca: number;
+    eNobu: number;
+    eDKI: number;
+    eMega: number;
+    eFlo: number;
+    gol_1: number;
+    gol_2: number;
+    gol_3: number;
+    gol_4: number;
+    gol_5: number;
 }
 
 export const columns: ColumnDef<Lalin>[] = [
   {
-    accessorKey: "ruas_nama",
+    accessorKey: "IdCabang",
     header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Ruas" />
     ),
   },
   {
-    accessorKey: "gerbang_nama",
+    accessorKey: "IdGerbang",
     header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Gerbang" />
     ),
   },
   {
-    accessorKey: "gardu",
+    accessorKey: "IdGardu",
     header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Gardu" />
     ),
   },
   {
-    accessorKey: "hari",
+    accessorKey: "Tanggal",
     header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Hari" />
     ),
   },
   {
-    accessorKey: "tanggal",
+    accessorKey: "Tanggal",
     header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Tanggal" />
     ),

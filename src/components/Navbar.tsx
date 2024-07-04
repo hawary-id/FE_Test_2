@@ -1,6 +1,6 @@
 'use client';
 
-import { useSidebar } from '@/context/SidebarContext';
+import { useAppContext } from '@/context/useAppContext';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { IoMdLogOut } from 'react-icons/io';
 import { IoChevronBack } from 'react-icons/io5';
@@ -12,7 +12,11 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuShortc
 interface INavbarProps {}
 
 export default function Navbar() {
-    const { isSidebarClose, toggleSidebar } = useSidebar();
+    const { isSidebarClose, toggleSidebar } = useAppContext();
+    const { logout } = useAppContext();
+    const handleLogout = () => {
+      logout(); 
+    };
 
    return (
         <div className="w-full sticky top-0 py-2 px-3 shadow-md bg-white flex items-center justify-between z-50">
@@ -31,7 +35,7 @@ export default function Navbar() {
                         Profile
                         <DropdownMenuShortcut><PiUserCircleGearLight className="text-xl"/></DropdownMenuShortcut>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={handleLogout}>
                         Log out
                         <DropdownMenuShortcut><IoMdLogOut className="text-xl"/></DropdownMenuShortcut>
                         </DropdownMenuItem>

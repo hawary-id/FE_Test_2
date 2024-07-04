@@ -5,7 +5,7 @@ import { PiRoadHorizonFill, PiRoadHorizonLight } from "react-icons/pi";
 
 export const MENU_DATA = [
     {
-        url:'/dashboard',
+        url:'/',
         label:'Dashboard',
         icon: <IoGridOutline className="text-xl"/>,
         iconActive: <IoGrid className="text-xl"/>
@@ -32,57 +32,6 @@ export const MENU_DATA = [
     },
 ]
 
-export const RUAS_DATA = [
-    { id: 1, nama: "Ruas 1" },
-    { id: 2, nama: "Ruas 2" },
-    { id: 3, nama: "Ruas 1" },
-    { id: 4, nama: "Ruas 1" },
-    { id: 5, nama: "Ruas 2" },
-    { id: 6, nama: "Ruas 2" },
-    { id: 7, nama: "Ruas 1" },
-    { id: 8, nama: "Ruas 1" },
-    { id: 9, nama: "Ruas 2" },
-    { id: 10, nama: "Ruas 2" },
-    { id: 11, nama: "Ruas 1" },
-    { id: 12, nama: "Ruas 1" },
-    { id: 13, nama: "Ruas 1" },
-    { id: 14, nama: "Ruas 2" },
-    { id: 15, nama: "Ruas 2" },
-    { id: 16, nama: "Ruas 1" },
-    { id: 17, nama: "Ruas 1" },
-    { id: 18, nama: "Ruas 2" },
-    { id: 19, nama: "Ruas 2" },
-    { id: 20, nama: "Ruas 1" },
-    { id: 21, nama: "Ruas 1" },
-    { id: 22, nama: "Ruas 1" },
-    { id: 23, nama: "Ruas 2" }
-]
-
-export const GERBANG_DATA = [
-    { id: 1, nama: "Cikarang Utama" },
-    { id: 2, nama: "Pasuruan Timur" },
-    { id: 3, nama: "Cikampek Barat" },
-    { id: 4, nama: "Purwakarta Utama" },
-    { id: 5, nama: "Mojokerto Timur" },
-    { id: 6, nama: "Tangerang Selatan" },
-    { id: 7, nama: "Brebes Timur" },
-    { id: 8, nama: "Cirebon Utara" },
-    { id: 9, nama: "Malang Utara" },
-    { id: 10, nama: "Garut Selatan" },
-]
-
-export const GARDU_DATA = [
-    { id: 1, nama: "01" },
-    { id: 2, nama: "02" },
-    { id: 3, nama: "03" },
-    { id: 4, nama: "04" },
-    { id: 5, nama: "05" },
-    { id: 6, nama: "06" },
-    { id: 7, nama: "07" },
-    { id: 8, nama: "08" },
-    { id: 9, nama: "09" },
-    { id: 10, nama: "10" },
-]
 export const LALIN_DATA = [
     {
         ruas_nama: "Ruas 1",

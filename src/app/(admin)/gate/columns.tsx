@@ -6,20 +6,22 @@ import { ColumnDef } from "@tanstack/react-table"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Lalin = {
-  ruas_nama: string
-  gerbang_nama: string
+export type Gate = {
+  id: number,
+  IdCabang: number,
+  NamaGerbang:string,
+  NamaCabang:string
 }
 
-export const columns: ColumnDef<Lalin>[] = [
+export const columns: ColumnDef<Gate>[] = [
   {
-    accessorKey: "ruas_nama",
+    accessorKey: "NamaCabang",
     header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Ruas" />
     ),
   },
   {
-    accessorKey: "gerbang_nama",
+    accessorKey: "NamaGerbang",
     header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Gerbang" />
     ),
@@ -28,7 +30,7 @@ export const columns: ColumnDef<Lalin>[] = [
     accessorKey: "action",
     header: "Aksi",
     cell: ({ row }) => (
-        <DatatableColumnAction row={row}/>
+        <DatatableColumnAction id={row.original.id} IdCabang={row.original.IdCabang}/>
     )
   },
 ]

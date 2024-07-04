@@ -1,6 +1,5 @@
 'use client';
-
-import { useSidebar } from '@/context/SidebarContext';
+import { useAppContext } from '@/context/useAppContext';
 import { MENU_DATA } from '@/lib/constant';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -11,7 +10,7 @@ interface ISidebarProps {}
 
 export default function Sidebar() {
     const pathname = usePathname();
-    const { isSidebarClose } = useSidebar();
+    const { isSidebarClose } = useAppContext();
     const [isOpen, setIsOpen] = useState(false);
     const toggleSubMenu = () => {
       setIsOpen(!isOpen);
@@ -46,10 +45,23 @@ export default function Sidebar() {
                             )}
                         </div>
                     ):(
-                        <Link href={item.url} className={`flex items-center gap-2 p-3 rounded-full ${isSidebarClose && 'justify-center'} ${pathname.startsWith(item.url) ? 'text-primary bg-blue-50' : 'hover:text-primary text-gray-500 hover:bg-blue-50'}`}>
-                            {pathname.startsWith(item.url) ? item.iconActive : item.icon}
+                        <Link
+                            href={item.url}
+                            className={`flex items-center gap-2 p-3 rounded-full ${
+                                isSidebarClose && "justify-center"
+                            } ${
+                                pathname === item.url && item.url === '/'
+                                ? "text-primary bg-blue-50"
+                                : pathname.startsWith(item.url) && item.url !== '/'
+                                ? "text-primary bg-blue-50"
+                                : "hover:text-primary text-gray-500 hover:bg-blue-50"
+                            }`}
+                            >
+                            {pathname === item.url && item.url === '/' ? item.iconActive : item.icon} 
                             {!isSidebarClose && item.label}
                         </Link>
+
+
                     )}
                 </li>
             ))}

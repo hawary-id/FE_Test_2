@@ -3,23 +3,64 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
 import { signInFormSchema } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 interface IpageProps {}
 
-export default function signIn() {
+export default function signInPage() {
     const form = useForm<z.infer<typeof signInFormSchema>>({
         resolver: zodResolver(signInFormSchema),
     })
+    const router = useRouter();
+    const { toast } = useToast()
 
     const onSubmit = async (val: z.infer<typeof signInFormSchema>) => {
-
-        console.log(val);
+        try {
+            const response = await fetch('http://localhost:8080/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(val),
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('token', data.token);
+                router.push('/');
+            } else {
+                const errorData = await response.json();
+                toast({
+                    variant: "destructive",
+                    title: "Login failed",
+                    description: errorData.message || "Terjadi kesalahan",
+                });
+            }
+        } catch (error) {
+            toast({
+                variant: "destructive",
+                title: "Terjadi kesalahan",
+                description: "Gagal terhubung ke server",
+            });
+            console.error('An error occurred:', error);
+        }
     };
-   return (
+
+    
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if(token){
+            router.push('/')
+        }
+    },[])
+    
+   
+      
+    return (
         <div className='flex items-center'>
             <div className="w-full md:w-1/2 bg-white h-screen py-5 md:py-10 px-5 md:px-44 flex flex-col justify-center">
                 <div className="flex justify-center mb-3">
@@ -62,9 +103,7 @@ export default function signIn() {
                 </Form>
 
             </div>
-            <div className="hidden md:block w-1/2 bg-signin h-screen bg-cover bg-center">
-            
-            </div>
+            <div className="hidden md:block w-1/2 bg-signin h-screen bg-cover bg-center"></div>
         </div>
    );
 }
