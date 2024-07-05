@@ -21,28 +21,28 @@ export function DataTableFooter<TData extends Lalin>({
 
   const ruasTotals: { [ruas: string]: { [column: string]: number } } = {
     "Ruas 1": {
-      gol_1: 0,
-      gol_2: 0,
-      gol_3: 0,
-      gol_4: 0,
-      gol_5: 0,
-      total_lalin: 0,
+      GolI: 0,
+      GolII: 0,
+      GolIII: 0,
+      GolIV: 0,
+      GolV: 0,
+      Total: 0,
     },
     "Ruas 2": {
-      gol_1: 0,
-      gol_2: 0,
-      gol_3: 0,
-      gol_4: 0,
-      gol_5: 0,
-      total_lalin: 0,
+      GolI: 0,
+      GolII: 0,
+      GolIII: 0,
+      GolIV: 0,
+      GolV: 0,
+      Total: 0,
     },
     Keseluruhan: {
-      gol_1: 0,
-      gol_2: 0,
-      gol_3: 0,
-      gol_4: 0,
-      gol_5: 0,
-      total_lalin: 0,
+      GolI: 0,
+      GolII: 0,
+      GolIII: 0,
+      GolIV: 0,
+      GolV: 0,
+      Total: 0,
     },
   };
 
@@ -51,30 +51,30 @@ export function DataTableFooter<TData extends Lalin>({
 
     // Conditional Update: Only update totals if currentRuas is "Ruas 1"
     if (currentRuas === "Ruas 1") {
-      ruasTotals[currentRuas].gol_1 += row.gol_1 ?? 0;
-      ruasTotals[currentRuas].gol_2 += row.gol_2 ?? 0;
-      ruasTotals[currentRuas].gol_3 += row.gol_3 ?? 0;
-      ruasTotals[currentRuas].gol_4 += row.gol_4 ?? 0;
-      ruasTotals[currentRuas].gol_5 += row.gol_5 ?? 0;
-      ruasTotals[currentRuas].total_lalin += row.total_lalin ?? 0;
+      ruasTotals[currentRuas].GolI += row.GolI ?? 0;
+      ruasTotals[currentRuas].GolII += row.GolII ?? 0;
+      ruasTotals[currentRuas].GolIII += row.GolIII ?? 0;
+      ruasTotals[currentRuas].GolIV += row.GolIV ?? 0;
+      ruasTotals[currentRuas].GolV += row.GolV ?? 0;
+      ruasTotals[currentRuas].Total += row.Total ?? 0;
     }
 
     if (currentRuas === "Ruas 2") {
-      ruasTotals[currentRuas].gol_1 += row.gol_1 ?? 0;
-      ruasTotals[currentRuas].gol_2 += row.gol_2 ?? 0;
-      ruasTotals[currentRuas].gol_3 += row.gol_3 ?? 0;
-      ruasTotals[currentRuas].gol_4 += row.gol_4 ?? 0;
-      ruasTotals[currentRuas].gol_5 += row.gol_5 ?? 0;
-      ruasTotals[currentRuas].total_lalin += row.total_lalin ?? 0;
+      ruasTotals[currentRuas].GolI += row.GolI ?? 0;
+      ruasTotals[currentRuas].GolII += row.GolII ?? 0;
+      ruasTotals[currentRuas].GolIII += row.GolIII ?? 0;
+      ruasTotals[currentRuas].GolIV += row.GolIV ?? 0;
+      ruasTotals[currentRuas].GolV += row.GolV ?? 0;
+      ruasTotals[currentRuas].Total += row.Total ?? 0;
     }
 
     // Still update the "Keseluruhan" totals for all rows
-    ruasTotals.Keseluruhan.gol_1 += row.gol_1 ?? 0;
-    ruasTotals.Keseluruhan.gol_2 += row.gol_2 ?? 0;
-    ruasTotals.Keseluruhan.gol_3 += row.gol_3 ?? 0;
-    ruasTotals.Keseluruhan.gol_4 += row.gol_4 ?? 0;
-    ruasTotals.Keseluruhan.gol_5 += row.gol_5 ?? 0;
-    ruasTotals.Keseluruhan.total_lalin += row.total_lalin ?? 0;
+    ruasTotals.Keseluruhan.GolI += row.GolI ?? 0;
+    ruasTotals.Keseluruhan.GolII += row.GolII ?? 0;
+    ruasTotals.Keseluruhan.GolIII += row.GolIII ?? 0;
+    ruasTotals.Keseluruhan.GolIV += row.GolIV ?? 0;
+    ruasTotals.Keseluruhan.GolV += row.GolV ?? 0;
+    ruasTotals.Keseluruhan.Total += row.Total ?? 0;
   });
 
   return (

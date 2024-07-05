@@ -6,7 +6,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LALIN_DATA } from "@/lib/constant";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaRegFilePdf } from "react-icons/fa";
@@ -16,7 +15,7 @@ import { Lalin, columns } from "./columns";
 import { DataTable } from "./datatable";
 import { useAppContext } from "@/context/useAppContext";
 
-interface LalinData0 {
+interface apiData {
     id: number;
     IdCabang: number;
     IdGerbang: number;
@@ -45,6 +44,9 @@ interface LalinData0 {
 }
 
 interface LalinData {
+    IdCabang: number;
+    IdGerbang: number;
+    IdGardu: number;
     Tanggal: string;
     Hari: string;
     MetodePembayaran: string;
@@ -54,10 +56,18 @@ interface LalinData {
     GolIV: number;
     GolV: number;
     Total: number;
-  }
-  
+}
 
-  
+const CLUSTER_PEMBAYARAN: { [key: string]: string } = {
+    eMandiri: 'eMandiri',
+    eBri: 'eBri',
+    eBni: 'eBni',
+    eBca: 'eBca',
+    eNobu: 'eNobu',
+    eDKI: 'eDKI',
+    eMega: 'eMega',
+    eFlo: 'eFlo'
+};
 
 export default function Daily() {
     const { token } = useAppContext();
@@ -70,85 +80,89 @@ export default function Daily() {
     const [selectedMethod, setSelectedMethod] = useState('tunai');
     const router = useRouter();
 
-    const CLUSTER_PEMBAYARAN = {
-        eMandiri: "E-Toll",
-        eBri: "E-Toll",
-        eBni: "E-Toll",
-        eBca: "E-Toll",
-        eNobu: "E-Toll",
-        eDKI: "E-Toll",
-        eMega: "E-Toll",
-        eFlo: "Flo",
-        Tunai: "Tunai",
-    };
-
     useEffect(() => {
-        const token = localStorage.getItem('token')
-        if(!token){
-            router.push('/signin')
+        const token = localStorage.getItem('token');
+        if (!token) {
+            router.push('/signin');
         }
-    },[])
-
+    }, [router]);
 
     useEffect(() => {
         setLoading(true);
         const fetchLalinsData = async () => {
             try {
                 const apiUrl = activeFilterDate
-                ? `http://localhost:8080/api/lalins?tanggal=${activeFilterDate}`
-                : 'http://localhost:8080/api/lalins';
-        
+                    ? `http://localhost:8080/api/lalins?tanggal=${activeFilterDate}`
+                    : 'http://localhost:8080/api/lalins';
+
                 const response = await fetch(apiUrl, {
                     method: 'GET',
                     headers: {
-                    Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 });
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
                 }
-    
-                const responseData = await response.json();
-                const transformedData: LalinData[] = [];
 
-                responseData.data.rows.rows.forEach((row: LalinData) => { // Explicitly type the row as LalinData
+                const responseData = await response.json();
+                const transformedData: { [key: string]: apiData } = {};
+
+                responseData.data.rows.rows.forEach((row: apiData) => {
                     const tanggal = row.Tanggal.split("T")[0];
-            
-                    for (const metode in CLUSTER_PEMBAYARAN) {
-                      const cluster = CLUSTER_PEMBAYARAN[metode];
-            
-                      // Ensure type safety when accessing row properties
-                      const metodeLowerCase = cluster.toLowerCase() as keyof LalinData;
-            
-                      transformedData.push({
-                        Tanggal: tanggal,
-                        Hari: new Date(tanggal).toLocaleDateString('id-ID', { weekday: 'long' }),
-                        MetodePembayaran: cluster,
-                        GolI: row.Golongan === 1 ? row[metodeLowerCase] : 0,
-                        GolII: row.Golongan === 2 ? row[metodeLowerCase] : 0,
-                        GolIII: row.Golongan === 3 ? row[metodeLowerCase] : 0,
-                        GolIV: row.Golongan === 4 ? row[metodeLowerCase] : 0,
-                        GolV: row.Golongan === 5 ? row[metodeLowerCase] : 0,
-                        Total: row[metodeLowerCase],
-                      });
+                    const key = `${tanggal}-${row.Golongan}`;
+
+                    if (!transformedData[key]) {
+                        transformedData[key] = {
+                            IdCabang: row.IdCabang,
+                            IdGerbang: row.IdGerbang,
+                            IdGardu: row.IdGardu,
+                            Tanggal: tanggal,
+                            Hari: new Date(tanggal).toLocaleDateString('id-ID', { weekday: 'long' }),
+                            GolI: 0,
+                            GolII: 0,
+                            GolIII: 0,
+                            GolIV: 0,
+                            GolV: 0,
+                            Total: 0,
+                        };
+                    }
+
+                    transformedData[key].Total += row.Tunai + row.DinasOpr + row.DinasMitra + row.DinasKary + row.eMandiri + row.eBri + row.eBni + row.eBca + row.eNobu + row.eDKI + row.eMega + row.eFlo;
+
+                    switch (row.Golongan) {
+                        case 1:
+                            transformedData[key].GolI += row.Tunai + row.DinasOpr + row.DinasMitra + row.DinasKary + row.eMandiri + row.eBri + row.eBni + row.eBca + row.eNobu + row.eDKI + row.eMega + row.eFlo;
+                            break;
+                        case 2:
+                            transformedData[key].GolII += row.Tunai + row.DinasOpr + row.DinasMitra + row.DinasKary + row.eMandiri + row.eBri + row.eBni + row.eBca + row.eNobu + row.eDKI + row.eMega + row.eFlo;
+                            break;
+                        case 3:
+                            transformedData[key].GolIII += row.Tunai + row.DinasOpr + row.DinasMitra + row.DinasKary + row.eMandiri + row.eBri + row.eBni + row.eBca + row.eNobu + row.eDKI + row.eMega + row.eFlo;
+                            break;
+                        case 4:
+                            transformedData[key].GolIV += row.Tunai + row.DinasOpr + row.DinasMitra + row.DinasKary + row.eMandiri + row.eBri + row.eBni + row.eBca + row.eNobu + row.eDKI + row.eMega + row.eFlo;
+                            break;
+                        case 5:
+                            transformedData[key].GolV += row.Tunai + row.DinasOpr + row.DinasMitra + row.DinasKary + row.eMandiri + row.eBri + row.eBni + row.eBca + row.eNobu + row.eDKI + row.eMega + row.eFlo;
+                            break;
+                        default:
+                            break;
                     }
                 });
 
-            setData(transformedData);
-            
-          } catch (error) {
-            console.error('Error fetching lalins data:', error);
-          } finally {
-            setLoading(false);
-          }
+                setData(Object.values(transformedData));
+            } catch (error) {
+                console.error('Error fetching lalins data:', error);
+            } finally {
+                setLoading(false);
+            }
         };
 
         if (token) {
-          fetchLalinsData();
+            fetchLalinsData();
         }
-    }, [token,activeFilterDate]);
-
-    console.log(data)
+    }, [token, activeFilterDate]);
 
     const handleFiltered = () => {
         setLoading(true);
@@ -156,15 +170,16 @@ export default function Daily() {
             try {
                 const newData = data.filter(item => {
                     const textFilterPasses = filterText === "" ||
-                        [item.IdCabang, item.IdGerbang].some(
-                        field => field.toString().includes(filterText.toLowerCase())
+                        [item.Tanggal].some(
+                            field => field.toString().toLowerCase().includes(filterText.toLowerCase())
                         );
-                  
+
                     const dateFilterPasses = filterDate === "" ||
                         new Date(item.Tanggal).toDateString() === new Date(filterDate).toDateString();
+
                     return textFilterPasses && dateFilterPasses;
-                  });
-                setData(newData);
+                });
+                setFilteredData(newData);
             } catch (error) {
                 console.error("Error filtering data:", error);
             } finally {
@@ -179,7 +194,7 @@ export default function Daily() {
         setLoading(true);
         setTimeout(() => {
             try {
-                setData(data);
+                setFilteredData(data);
                 router.replace('/report/daily');
             } catch (error) {
                 console.error("Error filtering data:", error);
@@ -192,77 +207,76 @@ export default function Daily() {
     useEffect(() => {
         setLoading(true);
         const timer = setTimeout(() => {
-          let filtered;
-          switch (selectedMethod) {
-            case 'tunai':
-              filtered = data.filter(item => item.metode_pembayaran === 'Tunai');
-              break;
-            case 'toll':
-              filtered = data.filter(item => item.metode_pembayaran === 'E-toll');
-              break;
-            case 'fio':
-              filtered = data.filter(item => item.metode_pembayaran === 'fio');
-              break;
-            case 'ktp':
-              filtered = data.filter(item => item.metode_pembayaran === 'ktp');
-              break;
-            case 'total':
-              filtered = data;
-              break;
-            case 'total2':
-              filtered = data.filter(item => ['Tunai', 'E-toll', 'fio'].includes(item.metode_pembayaran));
-              break;
-            default:
-              filtered = data;
-          }
-          setFilteredData(filtered);
-          setLoading(false);
+            let filtered;
+            switch (selectedMethod) {
+                case 'tunai':
+                    filtered = data.filter(item => item.MetodePembayaran === 'Tunai');
+                    break;
+                case 'toll':
+                    filtered = data.filter(item => item.MetodePembayaran === 'E-toll');
+                    break;
+                case 'fio':
+                    filtered = data.filter(item => item.MetodePembayaran === 'fio');
+                    break;
+                case 'ktp':
+                    filtered = data.filter(item => item.MetodePembayaran === 'ktp');
+                    break;
+                case 'total':
+                    filtered = data;
+                    break;
+                case 'total2':
+                    filtered = data.filter(item => ['Tunai', 'E-toll', 'fio'].includes(item.MetodePembayaran));
+                    break;
+                default:
+                    filtered = data;
+            }
+            setFilteredData(filtered);
+            setLoading(false);
         }, 500);
-    
+
         return () => clearTimeout(timer);
-      }, [selectedMethod, data]);
+    }, [selectedMethod, data]);
 
-
-    return(
+    return (
         <Card>
             <CardHeader>
                 <CardTitle>Laporan lalin per hari</CardTitle>
                 <CardDescription>Card Description</CardDescription>
             </CardHeader>
-            <Separator/>
+            <Separator />
             <CardContent>
                 <div className="flex items-center gap-5 my-5">
-                    <Input type="search" placeholder="Cari..." className="w-1/4 inline-block" value={filterText} onChange={(e) => setFilterText(e.target.value)}/>
-                    <Input type="date" className="w-1/4 inline-block" value={filterDate} onChange={(e) => setFilterDate(e.target.value)}/>
+                    <Input type="search" placeholder="Cari..." className="w-1/4 inline-block" value={filterText} onChange={(e) => setFilterText(e.target.value)} />
+                    <Input type="date" className="w-1/4 inline-block" value={filterDate} onChange={(e) => setFilterDate(e.target.value)} />
                     <div className="flex items-center justify-end gap-3">
                         <Button onClick={handleFiltered}>Filter</Button>
                         <Button variant="outline" onClick={handleReset}>Reset</Button>
                     </div>
                 </div>
-                <Separator/>
+                <Separator />
                 <div className="flex justify-end my-5">
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline">
-                            <TiExportOutline className="text-xl mr-1"/>
-                            Export</Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-56" align="end">
-                        <DropdownMenuLabel>Choose an Option :</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                Excel
-                                <DropdownMenuShortcut><RiFileExcel2Line className="text-xl"/></DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                PDF
-                                <DropdownMenuShortcut><FaRegFilePdf className="text-xl"/></DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        
-                    </DropdownMenuContent>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline">
+                                <TiExportOutline className="text-xl mr-1" />
+                                Export
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56" align="end">
+                            <DropdownMenuLabel>Choose an Option :</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuGroup>
+                                <DropdownMenuItem>
+                                    Excel
+                                    <DropdownMenuShortcut><RiFileExcel2Line className="text-xl" /></DropdownMenuShortcut>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    PDF
+                                    <DropdownMenuShortcut><FaRegFilePdf className="text-xl" /></DropdownMenuShortcut>
+                                </DropdownMenuItem>
+                            </DropdownMenuGroup>
+                            <DropdownMenuSeparator />
+                        </DropdownMenuContent>
                     </DropdownMenu>
                 </div>
 
@@ -277,13 +291,13 @@ export default function Daily() {
                     </TabsList>
                     <TabsContent value={selectedMethod}>
                         {loading ? (
-                        <Loading />
+                            <Loading />
                         ) : (
-                        <DataTable columns={columns} data={data} />
+                            <DataTable columns={columns} data={data} />
                         )}
                     </TabsContent>
                 </Tabs>
             </CardContent>
         </Card>
-    )
+    );
 }
