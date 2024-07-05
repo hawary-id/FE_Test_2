@@ -1,6 +1,4 @@
 "use client";
-
-import { Lalin } from "@/app/report/daily/columns";
 import {
     TableCell,
     TableFooter,
@@ -9,6 +7,21 @@ import {
 import {
     Table
 } from "@tanstack/react-table";
+
+interface Lalin {
+  IdCabang: number;
+  IdGerbang: number;
+  IdGardu: number;
+  Tanggal: string;
+  Hari: string;
+  MetodePembayaran: string;
+  GolI: number;
+  GolII: number;
+  GolIII: number;
+  GolIV: number;
+  GolV: number;
+  Total: number;
+}
 
 interface DataTableFooterProps<TData extends Lalin> {
   table: Table<TData>;
@@ -47,10 +60,10 @@ export function DataTableFooter<TData extends Lalin>({
   };
 
   tableData.forEach((row: Lalin) => {
-    const currentRuas = row.ruas_nama; 
+    const currentRuas = row.IdCabang; 
 
     // Conditional Update: Only update totals if currentRuas is "Ruas 1"
-    if (currentRuas === "Ruas 1") {
+    if (currentRuas === 1) {
       ruasTotals[currentRuas].GolI += row.GolI ?? 0;
       ruasTotals[currentRuas].GolII += row.GolII ?? 0;
       ruasTotals[currentRuas].GolIII += row.GolIII ?? 0;
@@ -59,7 +72,7 @@ export function DataTableFooter<TData extends Lalin>({
       ruasTotals[currentRuas].Total += row.Total ?? 0;
     }
 
-    if (currentRuas === "Ruas 2") {
+    if (currentRuas === 2) {
       ruasTotals[currentRuas].GolI += row.GolI ?? 0;
       ruasTotals[currentRuas].GolII += row.GolII ?? 0;
       ruasTotals[currentRuas].GolIII += row.GolIII ?? 0;

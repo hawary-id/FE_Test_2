@@ -36,11 +36,13 @@ interface apiData {
     eDKI: number;
     eMega: number;
     eFlo: number;
-    gol_1: number;
-    gol_2: number;
-    gol_3: number;
-    gol_4: number;
-    gol_5: number;
+    GolI: number;
+    GolII: number;
+    GolIII: number;
+    GolIV: number;
+    GolV: number;
+    Hari: string;
+    Total: number;
 }
 
 interface LalinData {

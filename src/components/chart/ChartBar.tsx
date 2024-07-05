@@ -11,6 +11,7 @@ interface IBarChartProps {
 
 export default function ChartBar({data}:IBarChartProps) {
    
+    console.log(data)
    return (
     <ResponsiveContainer width="100%" height="100%">
         <BarChart
